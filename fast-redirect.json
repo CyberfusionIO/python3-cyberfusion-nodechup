@@ -1,0 +1,40 @@
+{
+  "redirects": {
+    "301-query-parameter-in-destination-url.com": {
+      "destination_url": "https://nos.nl?e=f",
+      "status_code": 301,
+      "keep_query_parameters": true,
+      "keep_path": true
+    },
+    "301-keep-all.com": {
+      "destination_url": "https://nos.nl",
+      "status_code": 301,
+      "keep_query_parameters": true,
+      "keep_path": true
+    },
+    "302-keep-none.com": {
+      "destination_url": "https://nu.nl",
+      "status_code": 302,
+      "keep_query_parameters": false,
+      "keep_path": false
+    },
+    "303-keep-all.com": {
+      "destination_url": "https://ad.nl",
+      "status_code": 303,
+      "keep_query_parameters": true,
+      "keep_path": true
+    },
+    "200-invalid-status-code.com": {
+      "destination_url": "https://ed.nl",
+      "status_code": 200,
+      "keep_query_parameters": true,
+      "keep_path": true
+    },
+    "301-invalid-destination-url.com": {
+      "destination_url": "ed.nl",
+      "status_code": 301,
+      "keep_query_parameters": true,
+      "keep_path": true
+    }
+  }
+}
