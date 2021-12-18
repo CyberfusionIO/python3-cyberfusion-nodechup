@@ -15,5 +15,7 @@ ExecReload=/bin/kill -s HUP $MAINPID
 ExecStop=/bin/kill -s TERM $MAINPID
 PrivateTmp=true
 
+Environment=DATABASE_PATH=/var/lib/fast-redirect.json
+
 [Install]
 WantedBy=multi-user.target

@@ -7,7 +7,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="fast_redirect",
-    version="1.0",
+    version="1.0.1",
     description="Use Fast Redirect to easily redirect your domains.",
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -26,7 +26,11 @@ setup(
     entry_points={
         "console_scripts": ["fast-redirect=fast_redirect.server:main"]
     },
-    install_requires=["starlette==0.17.1", "uvicorn==0.16.0"],
+    install_requires=[
+        "starlette==0.17.1",
+        "uvicorn==0.16.0",
+        "validators==0.18.2",
+    ],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
