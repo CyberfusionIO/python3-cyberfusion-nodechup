@@ -6,7 +6,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setup(
-    name="Fast Redirect",
+    name="fast_redirect",
     version="1.0",
     description="Use Fast Redirect to easily redirect your domains.",
     long_description=long_description,
@@ -14,7 +14,7 @@ setup(
     python_requires=">=3.6",
     author="William Edwards",
     author_email="opensource@cyberfusion.nl",
-    url="https://vcs.cyberfusion.nl/open-source/fast-redirect",
+    url="https://github.com/CyberfusionNL/Fast-Redirect",
     platforms=["linux"],
     packages=find_packages(
         include=[

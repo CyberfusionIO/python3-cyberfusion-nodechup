@@ -40,12 +40,12 @@ build:
       - dist/*
     expire_in: 1 week
 
-# live deploy:
-#   stage: deploy
-#   only:
-#     - main
-#   dependencies:
-#     - build
-#   script:
-#     - pip3 install twine
-#     - twine upload --non-interactive dist/*
+live deploy:
+  stage: deploy
+  only:
+    - main
+  dependencies:
+    - build
+  script:
+    - pip3 install twine
+    - twine upload --non-interactive dist/*

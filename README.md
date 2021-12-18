@@ -2,13 +2,13 @@
 
 Use Fast Redirect to easily redirect your domains. The idea is simple. You have a JSON database, in which you define domains to redirect, and a few redirect options. Fast Redirect will then redirect traffic as configured.
 
-# Run
+# Install & Run
 
-We recommend running Fast Redirect in a venv.
+We recommend running Fast Redirect in a venv. Install the package with `pip3 install fast_redirect`.
 
-`bin/fast-redirect` starts a server on `LISTEN_PORT` (default: `8080`). By default, the server binds only to `::1` (IPv6). Both are configurable.
+Run `bin/fast-redirect` to start a server on `LISTEN_PORT` (default: `8080`). By default, the server binds only to `::1` (IPv6). Both are configurable.
 
-An example systemd configuration can be found in `fast-redirect.service`.
+You may daemonize the server. An example systemd configuration can be found in `fast-redirect.service`.
 
 # Database
 
