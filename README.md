@@ -23,7 +23,7 @@ Run `bin/fast-redirect` to start the server. By default, it listens on port `808
 The JSON database contains a `redirects` object. In turn, this object contains an object for each redirect with the following properties:
 
 * `destination_url`. The URL to redirect to. Query parameters and the path may be appended (see other options). This **must** be a URL (i.e. `www.domlimev.nl` is invalid).
-* `status_code`. Allowed values `301`, `302` and `303`, `307`, `308`.
+* `status_code`. Allowed values: `301`, `302`, `303`, `307`, `308`
 * `keep_query_parameters`. Whether query parameters are kept. If this is false, query parameters are discarded from the `destination_url`. For example, if this is false, `https://domlimev.nl/page?k=v` would be redirected to `https://example.com`.
 * `keep_path`. Whether the path is kept. If this is false, the path is discarded from the `destination_url`. For example, if this is false, `https://domlimev.nl/this/is/a/path` would be redirected to `https://example.com`.
 

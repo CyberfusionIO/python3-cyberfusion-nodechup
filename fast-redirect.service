@@ -1,5 +1,7 @@
 # Drop this file into /etc/systemd/system/fast-redirect.service
-# This example configuration assumes that you have installed Fast Redirect in a venv at /opt/fast-redirect
+#
+# This example configuration assumes that a user called 'fast-redirect' exists,
+# and that you have installed Fast Redirect in a venv at /opt/fast-redirect
 
 [Unit]
 Description=Fast Redirect
@@ -10,10 +12,8 @@ User=fast-redirect
 Group=fast-redirect
 WorkingDirectory=/opt/fast-redirect
 ExecStart=/opt/fast-redirect/bin/fast-redirect
-AmbientCapabilities=CAP_NET_BIND_SERVICE
-ExecReload=/bin/kill -s HUP $MAINPID
-ExecStop=/bin/kill -s TERM $MAINPID
 PrivateTmp=true
+KillMode=mixed
 
 Environment=DATABASE_PATH=/var/lib/fast-redirect.json
 

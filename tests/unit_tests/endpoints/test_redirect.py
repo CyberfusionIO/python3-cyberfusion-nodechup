@@ -29,7 +29,7 @@ def test_redirect_domain_not_exists(test_client: TestClient) -> None:
 
 
 def test_invalid_host_header(test_client: TestClient) -> None:
-    """Test that API returns 500 when the HTTP Host header is invalud."""
+    """Test that exception is raised when the HTTP host header is invalid."""
     with pytest.raises(HTTPHostHeaderDomainInvalid):
         test_client.get("/", headers={"Host": "123"})
 
