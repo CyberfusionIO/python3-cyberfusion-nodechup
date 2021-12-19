@@ -164,7 +164,7 @@ class Database:
         if _redirect_by_wildcard_domain:
             return RedirectInformation(_redirect_by_wildcard_domain)
 
-        # At this point, there is no match for either a literal domain and
+        # At this point, there is no match for either a literal domain or
         # wildcard domain
 
         raise DomainNotExistsError
