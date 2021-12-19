@@ -30,6 +30,8 @@ class RedirectInformation:
             status.HTTP_301_MOVED_PERMANENTLY,
             status.HTTP_302_FOUND,
             status.HTTP_303_SEE_OTHER,
+            status.HTTP_307_TEMPORARY_REDIRECT,
+            status.HTTP_308_PERMANENT_REDIRECT,
         ]:
             raise StatusCodeInvalidError
 

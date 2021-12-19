@@ -24,6 +24,18 @@
       "keep_query_parameters": true,
       "keep_path": true
     },
+    "307-keep-all.com": {
+      "destination_url": "https://rd.nl",
+      "status_code": 307,
+      "keep_query_parameters": true,
+      "keep_path": true
+    },
+    "308-keep-all.com": {
+      "destination_url": "https://nd.nl",
+      "status_code": 308,
+      "keep_query_parameters": true,
+      "keep_path": true
+    },
     "200-invalid-status-code.com": {
       "destination_url": "https://ed.nl",
       "status_code": 200,
