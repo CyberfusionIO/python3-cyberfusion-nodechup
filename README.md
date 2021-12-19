@@ -18,6 +18,10 @@ All configuration variables can be found in the `.env.example` file. Only one co
 
 Run `bin/fast-redirect` to start the server. By default, it listens on port `8080` and binds to `::1` (IPv6). The server can be daemonized. An example systemd configuration can be found in `fast-redirect.service`.
 
+## SSL
+
+Fast Redirect does not support SSL natively. Use a proxy that takes care of SSL, such as [HAProxy](http://www.haproxy.org/).
+
 # JSON Database
 
 The JSON database contains a `redirects` object. In turn, this object contains an object for each redirect with the following properties:
