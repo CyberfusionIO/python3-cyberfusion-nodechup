@@ -59,7 +59,7 @@ class Database:
         self.load()
 
     def load(self) -> None:
-        """Load database contents."""
+        """Load redirects from database."""
 
         # Load JSON file
 
@@ -77,22 +77,20 @@ class Database:
 
             _contents[domain] = obj
 
-        # Set self.contents
+        # Set self.redirects
 
-        self.contents = _contents
+        self.redirects = _contents
 
     def get_redirect_information(self, domain: str) -> RedirectInformation:
-        """Get redirect information from database."""
+        """Get redirect information for domain."""
         try:
-            redirect_information = self.contents[domain]
+            redirect = self.redirects[domain]
         except KeyError:
             raise DomainNotExistsError
 
         return RedirectInformation(
-            destination_url=redirect_information["destination_url"],
-            status_code=redirect_information["status_code"],
-            keep_query_parameters=redirect_information[
-                "keep_query_parameters"
-            ],
-            keep_path=redirect_information["keep_path"],
+            destination_url=redirect["destination_url"],
+            status_code=redirect["status_code"],
+            keep_query_parameters=redirect["keep_query_parameters"],
+            keep_path=redirect["keep_path"],
         )
