@@ -12,6 +12,12 @@
       "keep_query_parameters": true,
       "keep_path": true
     },
+    "*.301-wildcard.com": {
+      "destination_url": "https://fd.nl",
+      "status_code": 301,
+      "keep_query_parameters": true,
+      "keep_path": true
+    },
     "301-keep-all.com": {
       "destination_url": "https://nos.nl",
       "status_code": 301,

@@ -24,7 +24,9 @@ Fast Redirect does not support SSL natively. Use a proxy that takes care of SSL,
 
 # JSON Database
 
-The JSON database contains a `redirects` object. In turn, this object contains an object for each redirect with the following properties:
+The JSON database contains a `redirects` object. In turn, this object contains an object for each redirect. The key is the domain to redirect. Wildcards are supported.
+
+Properties:
 
 * `destination_url`. The URL to redirect to. Query parameters and the path may be appended (see other options). This **must** be a URL (i.e. `www.domlimev.nl` is invalid).
 * `status_code`. Allowed values: `301`, `302`, `303`, `307`, `308`

@@ -1,7 +1,7 @@
 """JSON database functions."""
 
 import json
-from typing import Dict
+from typing import Dict, Optional
 
 import validators
 from starlette import status
@@ -12,18 +12,11 @@ from fast_redirect.exceptions.database import (
     DomainNotExistsError,
     StatusCodeInvalidError,
 )
+from fast_redirect.utilities import CHAR_LABEL, get_domain_is_wildcard
 
 
 class Redirect:
     """Represents redirect in database."""
-
-    VALID_STATUS_CODES = [
-        status.HTTP_301_MOVED_PERMANENTLY,
-        status.HTTP_302_FOUND,
-        status.HTTP_303_SEE_OTHER,
-        status.HTTP_307_TEMPORARY_REDIRECT,
-        status.HTTP_308_PERMANENT_REDIRECT,
-    ]
 
     def __init__(
         self,
@@ -34,25 +27,42 @@ class Redirect:
         keep_query_parameters: bool,
         keep_path: bool,
     ) -> None:
-        """Validate and set attributes."""
-
-        # Validate attributes
-        #
-        # This code is reached when this specific redirect
-        # actually has to be used. That's why we do validation here instead of
-        # in Database.load, so that the app is resistant to misconfiguration of a
-        # single redirect.
-
-        self._validate_status_code(status_code)
-        self._validate_destination_url(destination_url)
-
-        # Set attributes
-
-        self.domain = domain.lower()  # Should be case-insensitive
+        """Set attributes."""
+        self.domain = domain
         self.destination_url = destination_url
         self.status_code = status_code
         self.keep_query_parameters = keep_query_parameters
         self.keep_path = keep_path
+
+
+class RedirectInformation:
+    """Represents redirect information for domain."""
+
+    VALID_STATUS_CODES = [
+        status.HTTP_301_MOVED_PERMANENTLY,
+        status.HTTP_302_FOUND,
+        status.HTTP_303_SEE_OTHER,
+        status.HTTP_307_TEMPORARY_REDIRECT,
+        status.HTTP_308_PERMANENT_REDIRECT,
+    ]
+
+    def __init__(self, redirect: Redirect) -> None:
+        """Validate and set attributes."""
+
+        # Validate attributes
+        #
+        # Has to be done here instead of in 'Redirect', because raising exceptions
+        # in middleware isn't ideal
+
+        self._validate_status_code(redirect.status_code)
+        self._validate_destination_url(redirect.destination_url)
+
+        # Set attributes
+
+        self.destination_url = redirect.destination_url
+        self.status_code = redirect.status_code
+        self.keep_query_parameters = redirect.keep_query_parameters
+        self.keep_path = redirect.keep_path
 
     def _validate_status_code(self, status_code: int) -> None:
         """Raise if status code is not valid."""
@@ -67,17 +77,6 @@ class Redirect:
             return
 
         raise DestinationURLInvalidError
-
-
-class RedirectInformation:
-    """Represents redirect information for domain."""
-
-    def __init__(self, redirect: Redirect) -> None:
-        """Set attributes."""
-        self.destination_url = redirect.destination_url
-        self.status_code = redirect.status_code
-        self.keep_query_parameters = redirect.keep_query_parameters
-        self.keep_path = redirect.keep_path
 
 
 class Database:
@@ -102,13 +101,70 @@ class Database:
         # Add Redirect objects
 
         for domain, obj in _contents["redirects"].items():
+            domain = domain.lower()  # Should be case-insensitive
+
             self.redirects[domain] = Redirect(domain=domain, **obj)
 
-    def get_redirect_information(self, domain: str) -> RedirectInformation:
-        """Get redirect information for domain."""
+    def _get_redirect_by_literal_domain(
+        self, domain: str
+    ) -> Optional[Redirect]:
+        """Get redirect from database by literal domain."""
         try:
-            redirect = self.redirects[domain]
+            return self.redirects[domain]
         except KeyError:
-            raise DomainNotExistsError
+            # Not in database
 
-        return RedirectInformation(redirect)
+            return None
+
+    def _get_redirect_by_wildcard_domain(
+        self, domain: str
+    ) -> Optional[Redirect]:
+        """Get redirect from database by wildcard domain."""
+        for _domain, redirect in self.redirects.items():
+            # This can't match if the _domain is not a wildcard
+
+            if not get_domain_is_wildcard(_domain):
+                continue
+
+            # When we get here, we know '_domain[1:]' is '*'. If we remove both
+            # first parts, and they are the same, domain is covered by the
+            # wildcard _domain
+
+            if domain.split(CHAR_LABEL)[1:] != _domain.split(CHAR_LABEL)[1:]:
+                continue
+
+            return redirect
+
+        return None
+
+    def get_redirect_information(self, domain: str) -> RedirectInformation:
+        """Get redirect information for domain.
+
+        There are two cases in which a domain can be matched to a redirect:
+
+        - When a redirect for the literal domain exists (preferred).
+        - When a redirect for a wildcard domain exists.
+        """
+
+        # Get redirect by literal domain (prefer over wildcard)
+
+        _redirect_by_literal_domain = self._get_redirect_by_literal_domain(
+            domain
+        )
+
+        if _redirect_by_literal_domain:
+            return RedirectInformation(_redirect_by_literal_domain)
+
+        # Get redirect by wildcard domain
+
+        _redirect_by_wildcard_domain = self._get_redirect_by_wildcard_domain(
+            domain
+        )
+
+        if _redirect_by_wildcard_domain:
+            return RedirectInformation(_redirect_by_wildcard_domain)
+
+        # At this point, there is no match for either a literal domain and
+        # wildcard domain
+
+        raise DomainNotExistsError

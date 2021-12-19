@@ -8,6 +8,14 @@ from starlette.datastructures import QueryParams
 
 from fast_redirect.exceptions import HTTPHostHeaderDomainInvalid
 
+CHAR_PREFIX_WILDCARD = "*"
+CHAR_LABEL = "."
+
+
+def get_domain_is_wildcard(domain: str) -> bool:
+    """Determine if domain is wildcard."""
+    return domain.split(CHAR_LABEL)[0] == CHAR_PREFIX_WILDCARD
+
 
 def parse_host_header(value: str) -> str:
     """Parse HTTP host header."""

@@ -18,7 +18,7 @@ DEFAULT_PATH_PARAMS = [
     ("we/might/or/might/not/keep/this/path"),
 ]
 
-# Generic
+# Error handling
 
 
 def test_redirect_domain_not_exists(test_client: TestClient) -> None:
@@ -68,6 +68,9 @@ def test_redirect_domain_x_redirect_by_header(test_client: TestClient) -> None:
     assert response.headers["x-redirect-by"] == "fast-redirect"
 
 
+# Edge cases
+
+
 def test_redirect_domain_case_insensitive(
     test_client: TestClient,
 ) -> None:
@@ -77,7 +80,21 @@ def test_redirect_domain_case_insensitive(
         headers={"Host": "301-uppercase-domain.com"},
         **REDIRECT_REQUEST_OPTS,
     )
+    assert response.status_code == 301
     assert response.headers["location"] == "https://nos.nl"
+
+
+def test_redirect_domain_wildcard(
+    test_client: TestClient,
+) -> None:
+    """Test that domain is matched to redirect for wildcard domain."""
+    response = test_client.get(
+        "/",
+        headers={"Host": "test.301-wildcard.com"},
+        **REDIRECT_REQUEST_OPTS,
+    )
+    assert response.status_code == 301
+    assert response.headers["location"] == "https://fd.nl"
 
 
 # Path
