@@ -55,8 +55,6 @@ class InjectRedirectInformationMiddleware(BaseHTTPMiddleware):
             request.state.redirect_information = None
             request.state.redirect_error = redirect_error
 
-        # Return request
-
         response = await call_next(request)
 
         return response

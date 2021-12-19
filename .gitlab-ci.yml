@@ -25,7 +25,7 @@ unit test:
   script:
     - pip install --no-cache-dir -r requirements/test.txt
     - cp .env.ci .env
-    - pytest -vvv --cov-branch --cov=fast_redirect --cov-config=.coveragerc --cov-fail-under=90 --junitxml=report-pytest.xml
+    - pytest -vvv --cov-branch --cov=fast_redirect --cov-config=.coveragerc --cov-fail-under=95 --junitxml=report-pytest.xml
   artifacts:
     reports:
       junit: report-*.xml

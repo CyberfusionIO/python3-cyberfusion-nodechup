@@ -10,13 +10,15 @@ REDIRECT_REQUEST_OPTS = {"allow_redirects": False}
 HEADERS_301_KEEP_ALL = {"Host": "301-keep-all.com"}
 HEADERS_302_KEEP_NONE = {"Host": "302-keep-none.com"}
 HEADERS_303_KEEP_ALL = {"Host": "303-keep-all.com"}
+HEADERS_307_KEEP_ALL = {"Host": "307-keep-all.com"}
+HEADERS_308_KEEP_ALL = {"Host": "308-keep-all.com"}
 
 DEFAULT_PATH_PARAMS = [
     ("/we/might/or/might/not/keep/this/path"),
     ("we/might/or/might/not/keep/this/path"),
 ]
 
-# Generic
+# Error handling
 
 
 def test_redirect_domain_not_exists(test_client: TestClient) -> None:
@@ -27,7 +29,7 @@ def test_redirect_domain_not_exists(test_client: TestClient) -> None:
 
 
 def test_invalid_host_header(test_client: TestClient) -> None:
-    """Test that API returns 500 when the HTTP Host header is invalud."""
+    """Test that exception is raised when the HTTP host header is invalid."""
     with pytest.raises(HTTPHostHeaderDomainInvalid):
         test_client.get("/", headers={"Host": "123"})
 
@@ -64,6 +66,35 @@ def test_redirect_domain_x_redirect_by_header(test_client: TestClient) -> None:
         "/", headers=HEADERS_301_KEEP_ALL, **REDIRECT_REQUEST_OPTS
     )
     assert response.headers["x-redirect-by"] == "fast-redirect"
+
+
+# Edge cases
+
+
+def test_redirect_domain_case_insensitive(
+    test_client: TestClient,
+) -> None:
+    """Test that lowercase version of domain matches non-lowercase domain in database."""
+    response = test_client.get(
+        "/",
+        headers={"Host": "301-uppercase-domain.com"},
+        **REDIRECT_REQUEST_OPTS,
+    )
+    assert response.status_code == 301
+    assert response.headers["location"] == "https://nos.nl"
+
+
+def test_redirect_domain_wildcard(
+    test_client: TestClient,
+) -> None:
+    """Test that domain is matched to redirect for wildcard domain."""
+    response = test_client.get(
+        "/",
+        headers={"Host": "test.301-wildcard.com"},
+        **REDIRECT_REQUEST_OPTS,
+    )
+    assert response.status_code == 301
+    assert response.headers["location"] == "https://fd.nl"
 
 
 # Path
@@ -182,3 +213,19 @@ def test_redirect_domain_303_status_code(test_client: TestClient) -> None:
         "/", headers=HEADERS_303_KEEP_ALL, **REDIRECT_REQUEST_OPTS
     )
     assert response.status_code == 303
+
+
+def test_redirect_domain_307_status_code(test_client: TestClient) -> None:
+    """Test that correct 307 status code is returned."""
+    response = test_client.get(
+        "/", headers=HEADERS_307_KEEP_ALL, **REDIRECT_REQUEST_OPTS
+    )
+    assert response.status_code == 307
+
+
+def test_redirect_domain_308_status_code(test_client: TestClient) -> None:
+    """Test that correct 308 status code is returned."""
+    response = test_client.get(
+        "/", headers=HEADERS_308_KEEP_ALL, **REDIRECT_REQUEST_OPTS
+    )
+    assert response.status_code == 308

@@ -18,12 +18,18 @@ All configuration variables can be found in the `.env.example` file. Only one co
 
 Run `bin/fast-redirect` to start the server. By default, it listens on port `8080` and binds to `::1` (IPv6). The server can be daemonized. An example systemd configuration can be found in `fast-redirect.service`.
 
+## SSL
+
+Fast Redirect does not support SSL natively. Use a proxy that takes care of SSL, such as [HAProxy](http://www.haproxy.org/).
+
 # JSON Database
 
-The JSON database contains a `redirects` object. In turn, this object contains an object for each redirect with the following properties:
+The JSON database contains a `redirects` object. In turn, this object contains an object for each redirect. The key is the domain to redirect. Wildcards are supported.
+
+Properties:
 
 * `destination_url`. The URL to redirect to. Query parameters and the path may be appended (see other options). This **must** be a URL (i.e. `www.domlimev.nl` is invalid).
-* `status_code`. Allowed values `301`, `302` and `303`.
+* `status_code`. Allowed values: `301`, `302`, `303`, `307`, `308`
 * `keep_query_parameters`. Whether query parameters are kept. If this is false, query parameters are discarded from the `destination_url`. For example, if this is false, `https://domlimev.nl/page?k=v` would be redirected to `https://example.com`.
 * `keep_path`. Whether the path is kept. If this is false, the path is discarded from the `destination_url`. For example, if this is false, `https://domlimev.nl/this/is/a/path` would be redirected to `https://example.com`.
 
