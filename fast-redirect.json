@@ -6,6 +6,12 @@
       "keep_query_parameters": true,
       "keep_path": true
     },
+    "301-UppERCaSE-DOmAIN.CoM": {
+      "destination_url": "https://nos.nl",
+      "status_code": 301,
+      "keep_query_parameters": true,
+      "keep_path": true
+    },
     "301-keep-all.com": {
       "destination_url": "https://nos.nl",
       "status_code": 301,

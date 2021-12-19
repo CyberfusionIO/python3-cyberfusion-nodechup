@@ -46,8 +46,6 @@ class Redirect(HTTPEndpoint):
 
         built_url = build_url(**arguments)
 
-        # Return response
-
         return RedirectResponse(
             url=built_url,
             status_code=request.state.redirect_information.status_code,

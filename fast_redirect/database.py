@@ -24,7 +24,12 @@ class RedirectInformation:
         keep_query_parameters: bool,
         keep_path: bool,
     ) -> None:
-        """Set attributes."""
+        """Validate and set attributes."""
+
+        # Validate attributes. This code is reached when this specific redirect
+        # actually has to be used. That's why we do validation here instead of
+        # in Database.load, so that the app is resistant to misconfiguration of a
+        # single redirect.
 
         if status_code not in [
             status.HTTP_301_MOVED_PERMANENTLY,
@@ -37,6 +42,8 @@ class RedirectInformation:
 
         if not validators.url(destination_url):
             raise DestinationURLInvalidError
+
+        # Set attributes
 
         self.destination_url = destination_url
         self.status_code = status_code
@@ -53,13 +60,31 @@ class Database:
 
     def load(self) -> None:
         """Load database contents."""
+
+        # Load JSON file
+
         with open(settings.DATABASE_PATH, "r") as f:
-            self.contents = json.loads(f.read())
+            _contents = json.loads(f.read())
+
+        # Convert JSON file to database
+
+        for domain, obj in _contents["redirects"].items():
+            # Ensure domain is lowercase
+
+            domain = domain.lower()
+
+            # Add domain to database
+
+            _contents[domain] = obj
+
+        # Set self.contents
+
+        self.contents = _contents
 
     def get_redirect_information(self, domain: str) -> RedirectInformation:
         """Get redirect information from database."""
         try:
-            redirect_information = self.contents["redirects"][domain]
+            redirect_information = self.contents[domain]
         except KeyError:
             raise DomainNotExistsError
 

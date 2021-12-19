@@ -68,6 +68,18 @@ def test_redirect_domain_x_redirect_by_header(test_client: TestClient) -> None:
     assert response.headers["x-redirect-by"] == "fast-redirect"
 
 
+def test_redirect_domain_case_insensitive(
+    test_client: TestClient,
+) -> None:
+    """Test that lowercase version of domain matches non-lowercase domain in database."""
+    response = test_client.get(
+        "/",
+        headers={"Host": "301-uppercase-domain.com"},
+        **REDIRECT_REQUEST_OPTS,
+    )
+    assert response.headers["location"] == "https://nos.nl"
+
+
 # Path
 
 

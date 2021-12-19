@@ -11,10 +11,21 @@ from fast_redirect.exceptions import HTTPHostHeaderDomainInvalid
 
 def parse_host_header(value: str) -> str:
     """Parse HTTP host header."""
+
+    # The part before ':' is the host. The ':' may be absent, in which case this
+    # split won't do anything
+
     domain = value.split(":")[0]
+
+    # The host doesn't necessarily have to be a valid domain. This is just here
+    # as a failsafe.
 
     if not validators.domain(domain):
         raise HTTPHostHeaderDomainInvalid
+
+    # Ensure domain is lowercase
+
+    domain = domain.lower()
 
     return domain
 
