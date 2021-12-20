@@ -7,8 +7,8 @@ import validators
 from starlette.datastructures import QueryParams
 
 from fast_redirect.exceptions.http_host_header import (
+    HTTPHostHeaderDomainEmptyError,
     HTTPHostHeaderDomainInvalidError,
-    HTTPHostHeaderDomainUnsetError,
 )
 
 CHAR_PREFIX_WILDCARD = "*"
@@ -23,10 +23,11 @@ def get_domain_is_wildcard(domain: str) -> bool:
 def parse_host_header(value: Optional[str]) -> str:
     """Parse HTTP host header."""
 
-    # If no host is specified, we can't do anything redirect-wise
+    # If host is empty, we can't do anything redirect-wise. A missing host header
+    # should be handled by the server, e.g. by h11._util.RemoteProtocolError
 
     if not value:
-        raise HTTPHostHeaderDomainUnsetError
+        raise HTTPHostHeaderDomainEmptyError
 
     # The part before ':' is the host. The ':' may be absent, in which case this
     # split won't do anything

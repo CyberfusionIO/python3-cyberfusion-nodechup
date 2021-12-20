@@ -34,11 +34,7 @@ def test_redirect_domain_invalid(test_client: TestClient) -> None:
 
 
 def test_redirect_domain_empty(test_client: TestClient) -> None:
-    """Test response when the domain is empty.
-
-    Can't test completely missing host header, because its value defaults to
-    'testserver'.
-    """
+    """Test response when the domain is empty."""
     response = test_client.get("/", headers={"Host": ""})
     assert response.status_code == 400
     assert response.json() == {"detail": "Specify redirect to look for."}
