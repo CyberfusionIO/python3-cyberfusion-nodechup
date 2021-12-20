@@ -19,7 +19,7 @@ class HTTPHostHeaderDomainInvalidError(HTTPHostHeaderError):
 
 
 class HTTPHostHeaderDomainEmptyError(HTTPHostHeaderError):
-    """Domain in HTTP host header is empty (empty)."""
+    """Domain in HTTP host header is empty."""
 
     def __init__(self) -> None:
         """Set attributes."""
