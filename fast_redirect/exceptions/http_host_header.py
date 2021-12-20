@@ -18,8 +18,8 @@ class HTTPHostHeaderDomainInvalidError(HTTPHostHeaderError):
         self.detail = "It seems like I'm alive."  # Handle gracefully
 
 
-class HTTPHostHeaderDomainUnsetError(HTTPHostHeaderError):
-    """Domain in HTTP host header is unset (missing or empty)."""
+class HTTPHostHeaderDomainEmptyError(HTTPHostHeaderError):
+    """Domain in HTTP host header is empty."""
 
     def __init__(self) -> None:
         """Set attributes."""
