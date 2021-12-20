@@ -12,6 +12,8 @@ def main() -> None:
         host=settings.LISTEN_HOST,
         port=settings.LISTEN_PORT,
         log_level="info",
+        proxy_headers=bool(settings.TRUSTED_PROXY_ADDRESSES),
+        forwarded_allow_ips=settings.TRUSTED_PROXY_ADDRESSES,
     )
 
 
