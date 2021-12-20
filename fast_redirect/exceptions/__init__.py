@@ -1,7 +1,1 @@
-"""Generic exceptions."""
-
-
-class HTTPHostHeaderDomainInvalid(Exception):
-    """Domain in HTTP host header is invalid."""
-
-    pass
+"""Empty file to turn this into a package."""

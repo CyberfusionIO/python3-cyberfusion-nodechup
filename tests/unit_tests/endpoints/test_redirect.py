@@ -1,8 +1,6 @@
 import pytest
 from starlette.testclient import TestClient
 
-from fast_redirect.exceptions import HTTPHostHeaderDomainInvalid
-
 # 'allow_redirects=False' is needed, related: https://github.com/tiangolo/fastapi/issues/790#issuecomment-607636599
 
 REDIRECT_REQUEST_OPTS = {"allow_redirects": False}
@@ -29,9 +27,21 @@ def test_redirect_domain_not_exists(test_client: TestClient) -> None:
 
 
 def test_invalid_host_header(test_client: TestClient) -> None:
-    """Test that exception is raised when the HTTP host header is invalid."""
-    with pytest.raises(HTTPHostHeaderDomainInvalid):
-        test_client.get("/", headers={"Host": "123"})
+    """Test that no redirect occurs when the host header is invalid."""
+    response = test_client.get("/", headers={"Host": "123"})
+    assert response.status_code == 200
+    assert response.json() == {"detail": "It seems like I'm alive."}
+
+
+def test_empty_host_header(test_client: TestClient) -> None:
+    """Test that no redirect occurs when the host header is empty.
+
+    Can't test completely missing host header, because it defaults to
+    'testserver'.
+    """
+    response = test_client.get("/", headers={"Host": ""})
+    assert response.status_code == 400
+    assert response.json() == {"detail": "Specify redirect to look for."}
 
 
 def test_redirect_domain_invalid_destination_url_ignored(
