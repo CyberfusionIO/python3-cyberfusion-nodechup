@@ -22,6 +22,8 @@ Run `bin/fast-redirect` to start the server. By default, it listens on port `808
 
 Fast Redirect does not support SSL natively. Use a proxy that takes care of SSL, such as [HAProxy](http://www.haproxy.org/).
 
+If your proxy does health checks, make sure that the domain or IP address it uses for them is not configured as a redirect.
+
 # JSON Database
 
 The JSON database contains a `redirects` object. In turn, this object contains an object for each redirect. The key is the domain to redirect. Wildcards are supported.

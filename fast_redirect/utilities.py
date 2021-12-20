@@ -6,7 +6,10 @@ from urllib.parse import parse_qsl, urlencode, urljoin, urlparse, urlunparse
 import validators
 from starlette.datastructures import QueryParams
 
-from fast_redirect.exceptions import HTTPHostHeaderDomainInvalid
+from fast_redirect.exceptions.http_host_header import (
+    HTTPHostHeaderDomainInvalidError,
+    HTTPHostHeaderDomainUnsetError,
+)
 
 CHAR_PREFIX_WILDCARD = "*"
 CHAR_LABEL = "."
@@ -17,8 +20,13 @@ def get_domain_is_wildcard(domain: str) -> bool:
     return domain.split(CHAR_LABEL)[0] == CHAR_PREFIX_WILDCARD
 
 
-def parse_host_header(value: str) -> str:
+def parse_host_header(value: Optional[str]) -> str:
     """Parse HTTP host header."""
+
+    # If no host is specified, we can't do anything redirect-wise
+
+    if not value:
+        raise HTTPHostHeaderDomainUnsetError
 
     # The part before ':' is the host. The ':' may be absent, in which case this
     # split won't do anything
@@ -29,7 +37,7 @@ def parse_host_header(value: str) -> str:
     # as a failsafe.
 
     if not validators.domain(domain):
-        raise HTTPHostHeaderDomainInvalid
+        raise HTTPHostHeaderDomainInvalidError
 
     # Ensure domain is lowercase
 
