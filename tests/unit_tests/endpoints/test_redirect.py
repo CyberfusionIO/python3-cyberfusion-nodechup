@@ -20,23 +20,23 @@ DEFAULT_PATH_PARAMS = [
 
 
 def test_redirect_domain_not_exists(test_client: TestClient) -> None:
-    """Test that no redirect occurs when the domain doesn't exist."""
+    """Test response when the domain doesn't exist in the database."""
     response = test_client.get("/", headers={"Host": "domlimev.nl"})
     assert response.status_code == 400
     assert response.json() == {"detail": "No redirect exists for this domain."}
 
 
-def test_invalid_host_header(test_client: TestClient) -> None:
-    """Test that no redirect occurs when the host header is invalid."""
+def test_redirect_domain_invalid(test_client: TestClient) -> None:
+    """Test response when the domain is invalid."""
     response = test_client.get("/", headers={"Host": "123"})
     assert response.status_code == 200
     assert response.json() == {"detail": "It seems like I'm alive."}
 
 
-def test_empty_host_header(test_client: TestClient) -> None:
-    """Test that no redirect occurs when the host header is empty.
+def test_redirect_domain_empty(test_client: TestClient) -> None:
+    """Test response when the domain is empty.
 
-    Can't test completely missing host header, because it defaults to
+    Can't test completely missing host header, because its value defaults to
     'testserver'.
     """
     response = test_client.get("/", headers={"Host": ""})
@@ -44,10 +44,10 @@ def test_empty_host_header(test_client: TestClient) -> None:
     assert response.json() == {"detail": "Specify redirect to look for."}
 
 
-def test_redirect_domain_invalid_destination_url_ignored(
+def test_redirect_domain_invalid_destination_url(
     test_client: TestClient,
 ) -> None:
-    """Test that no redirect occurs when the destination URL is invalid."""
+    """Test response when the destination URL is invalid."""
     response = test_client.get(
         "/", headers={"Host": "301-invalid-destination-url.com"}
     )
@@ -57,10 +57,10 @@ def test_redirect_domain_invalid_destination_url_ignored(
     }
 
 
-def test_redirect_domain_invalid_status_code_ignored(
+def test_redirect_domain_invalid_status_code(
     test_client: TestClient,
 ) -> None:
-    """Test that no redirect occurs when the status code is invalid."""
+    """Test response when the status code is invalid."""
     response = test_client.get(
         "/", headers={"Host": "200-invalid-status-code.com"}
     )
