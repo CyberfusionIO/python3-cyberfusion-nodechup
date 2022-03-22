@@ -1,92 +1,56 @@
 # NodeCHUP
 
+Use NodeCHUP to easily **CH**ange and **UP**date Node.js installations.
 
+Only Linux systems are supported. Other systems such as WSL may work, but have not been tested.
 
-## Getting started
+This program only takes care of managing installations. It does not modify your shell to easily use different installations/versions.
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+## Use case
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+NodeCHUP exists because we need users to be able to set their own Node.js version, but Node.js binary distributions do not support multiple versions using an [alternatives system](https://wiki.debian.org/DebianAlternatives). Therefore, we can't use an existing package manager, and need to maintain a Node.js installation per user. However, many alternatives like [nvm](https://github.com/nvm-sh/nvm) are installed by running an install script and piping it to bash, which is a security nightmare.
 
-## Add your files
+NodeCHUP is designed to run on behalf of non-privileged users, i.e. you should not run this as root.
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+## Install
 
-```
-cd existing_repo
-git remote add origin https://vcs.cyberfusion.nl/open-source/nodechup.git
-git branch -M main
-git push -uf origin main
-```
-
-## Integrate with your tools
-
-- [ ] [Set up project integrations](https://vcs.cyberfusion.nl/open-source/nodechup/-/settings/integrations)
-
-## Collaborate with your team
-
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
-
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!).  Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+The package has been published to PyPI, so you could install it with `pip3 install nodechup`.
 
 ## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+NodeCHUP offers a stable Python API.
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+NodeCHUP has the concepts of 'base directory' and 'Node.js installations'. Each base directory is a directory that contains one or more Node.js installations, one per version. Every Node.js installation represents a Node.js version.
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+### Create Node.js installation
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+The magic happens in the `nodejs.Installation` class. Use it as follows:
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+```python
+import os
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+from nodechup.nodejs import BaseDirectory, Installation
 
-## License
-For open source projects, say how it is licensed.
+# Get base directory
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+base_directory_path = os.path.join(os.path.sep, *["usr", "local", "lib", "nodejs"])  # Following the example at https://github.com/nodejs/help/wiki/Installation. The base directory is created if it doesn't exist yet.
+base_directory = BaseDirectory(path=base_directory_path)
+
+# Set version. If a point release is not specified, the most recent point release for the major/minor is used.
+
+version = "14.19.1"
+version = "14.19"
+
+# Get installation
+
+installation = Installation(base_directory=base_directory, version=version)
+installation.download(update_default_version=True)  # See below for explanation
+```
+
+#### Update default (point release) version (for major/minor)
+
+When passing `update_default_version=True` to the `download` method, the program creates a symlink in the base directory path **from** the major/minor version **to** the point release that is being installed. The above example would create the following symlink:
+
+    /usr/local/lib/nodejs/14.19 -> /usr/local/lib/nodejs/14.19.1
+
+This makes updating major/minor versions easy. By downloading the major/minor Node.js version without specifying the point release, and with `update_default_version=True`, the most recent point release for the major/minor version will be downloaded. By telling your applications to use the path to the major/minor version (e.g. `/usr/local/lib/nodejs/14.19`), the most recent point release for that major/minor version will be used.
