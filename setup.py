@@ -7,7 +7,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="nodechup",
-    version="1.0",
+    version="1.1",
     description="Program to manage Node.js installations",
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -23,7 +23,8 @@ setup(
         ]
     ),
     data_files=[],
-    install_requires=["requests==2.27.1"],
+    entry_points={"console_scripts": ["nodechup=nodechup.CLI:main"]},
+    install_requires=["docopt==0.6.2", "schema==0.7.2", "requests==2.27.1"],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
