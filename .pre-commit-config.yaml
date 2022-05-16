@@ -4,7 +4,7 @@ repos:
     hooks:
       - id: isort
   - repo: https://github.com/ambv/black
-    rev: 20.8b1
+    rev: 22.3.0
     hooks:
       - id: black
         language_version: python3
@@ -21,7 +21,7 @@ repos:
       - id: requirements-txt-fixer
       - id: detect-private-key
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v0.790
+    rev: v0.942
     hooks:
       - id: mypy
         language_version: python3
@@ -33,7 +33,6 @@ repos:
         # inherit 'exclude' config option from .flake8
         exclude: '^tests/'
         additional_dependencies:
-          - flake8-bandit==2.1.2
           - flake8-bugbear==20.11.1
           - flake8-comprehensions==3.3.0
           - flake8-docstrings==1.5.0
