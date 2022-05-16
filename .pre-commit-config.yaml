@@ -25,6 +25,9 @@ repos:
     hooks:
       - id: mypy
         language_version: python3
+        additional_dependencies:
+          # Keep versions in sync with requirements/dev.txt
+          - types-requests==2.27.16
   - repo: https://gitlab.com/pycqa/flake8
     rev: 3.8.4
     hooks:
