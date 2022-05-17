@@ -45,7 +45,7 @@ def test_installation_download_without_update_default_version(
 
     assert installation.exists
 
-    assert not os.path.isfile(installation.PATH_ARCHIVE)
+    assert not os.path.isfile(installation.PATH_ARCHIVE)  # type: ignore[unreachable]
 
     # Test download again raises
 
@@ -86,7 +86,7 @@ def test_installation_download_with_update_default_version(
 
     assert installation.exists
 
-    assert not os.path.isfile(installation.PATH_ARCHIVE)
+    assert not os.path.isfile(installation.PATH_ARCHIVE)  # type: ignore[unreachable]
 
     # Test symlink from major/minor to directory to major/minor/point version path
 
