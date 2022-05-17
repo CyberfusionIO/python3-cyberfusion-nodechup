@@ -6,7 +6,7 @@ Usage:
 Options:
   -h --help                                      Show this screen.
   --base-directory-path=<base-directory-path>    Path to base directory
-  --version=<version>                            Version of Node.js installation.
+  --version=<version>                            Version of Node.js installation. Exits with RC 78 if Node.js version is already installed.
   --update-default-version                       Update default point release for major/minor version.
 """
 
@@ -53,4 +53,4 @@ def main() -> None:
                 "Node.js installation with the specified version already exists in the base directory"
             )
 
-            sys.exit(1)
+            sys.exit(78)
