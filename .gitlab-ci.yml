@@ -22,7 +22,6 @@ unit test:
   stage: test
   script:
     - pip install --no-cache-dir -r requirements/test.txt
-    - pip3 install docopt==0.6.2 schema==0.7.2 requests==2.27.1
     - pytest -vvv --cov-branch --cov=nodechup --cov-config=.coveragerc --cov-fail-under=50 --junitxml=report-pytest.xml
   artifacts:
     reports:
