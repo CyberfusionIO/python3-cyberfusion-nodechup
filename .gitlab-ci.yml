@@ -1,48 +1,22 @@
-image: python:3.9
+include:
+  - project: 'cyberfusion/gitlab-ci-includes'
+    ref: main
+    file:
+      - '/base.yml'
+      - '/pypi-packages.yml'
+      - '/python.yml'
 
 stages:
   - test
   - build
-  - deploy
-
-styling test:
-  stage: test
-  script:
-    - pip install --no-cache-dir -r requirements/dev.txt
-    - mypy . --junit-xml report-mypy.xml
-    - flake8 . --tee --output-file flake8.txt; exit_code=$?; flake8_junit flake8.txt report-flake8.xml
-    - if [ $exit_code -ne 0 ]; then exit 1; fi;
-    - isort -c .
-    - black --check .
-  artifacts:
-    reports:
-      junit: report-*.xml
+  - publish
 
 unit test:
   stage: test
+  image: python:3.9
   script:
     - pip install --no-cache-dir -r requirements/test.txt
     - pytest -vvv --cov-branch --cov=nodechup --cov-config=.coveragerc --cov-fail-under=50 --junitxml=report-pytest.xml
   artifacts:
     reports:
       junit: report-*.xml
-
-build:
-  stage: build
-  script:
-    - apt update
-    - python3 setup.py sdist
-  artifacts:
-    paths:
-      - dist/*
-    expire_in: 1 week
-
-live deploy:
-  stage: deploy
-  only:
-    - main
-  dependencies:
-    - build
-  script:
-    - pip3 install twine
-    - twine upload --non-interactive dist/*
