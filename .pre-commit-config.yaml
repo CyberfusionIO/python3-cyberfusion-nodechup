@@ -28,7 +28,7 @@ repos:
         # Keep in sync with mypy.ini. pre-commit does not
         # inherit 'exclude' config option from mypy.ini
         exclude: '^migrations/'
-  - repo: https://gitlab.com/pycqa/flake8
+  - repo: https://github.com/PyCQA/flake8
     rev: 3.8.4
     hooks:
       - id: flake8
