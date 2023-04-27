@@ -51,4 +51,6 @@ The domain or IP address that the proxy uses for health checks should not be con
 
 Run tests with pytest:
 
-    pytest tests/
+    DATABASE_PATH=fast-redirect.json pytest tests/
+
+The tests must be run from the project root.
