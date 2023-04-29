@@ -4,7 +4,15 @@ Fast Redirect redirects domains.
 
 # Install
 
-Install the package from PyPI:
+## Generic
+
+Run the following command to create a source distribution:
+
+    python3 setup.py sdist
+
+## PyPI
+
+Run the following command to install the package from PyPI:
 
     pip3 install fast-redirect
 
