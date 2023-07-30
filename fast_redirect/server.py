@@ -13,7 +13,7 @@ def main() -> None:
         port=settings.LISTEN_PORT,
         log_level="info",
         proxy_headers=bool(settings.TRUSTED_PROXY_ADDRESSES),
-        forwarded_allow_ips=settings.TRUSTED_PROXY_ADDRESSES,
+        forwarded_allow_ips=list(settings.TRUSTED_PROXY_ADDRESSES),
     )
 
 
