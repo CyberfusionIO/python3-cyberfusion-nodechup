@@ -24,7 +24,7 @@ setup(
     ),
     data_files=[],
     entry_points={"console_scripts": ["nodechup=nodechup.CLI:main"]},
-    install_requires=["docopt==0.6.2", "schema==0.7.2", "requests==2.27.1"],
+    install_requires=["docopt==0.6.2", "schema==0.7.5", "requests==2.27.1"],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
