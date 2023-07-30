@@ -29,7 +29,7 @@ setup(
     install_requires=[
         "starlette==0.31.0",
         "uvicorn==0.23.1",
-        "validators==0.18.2",
+        "validators==0.20.0",
     ],
     classifiers=[
         "Programming Language :: Python :: 3",
