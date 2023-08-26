@@ -27,7 +27,7 @@ setup(
         "console_scripts": ["fast-redirect=fast_redirect.server:main"]
     },
     install_requires=[
-        "starlette==0.31.0",
+        "starlette==0.31.1",
         "uvicorn==0.23.2",
         "validators==0.21.2",
     ],
