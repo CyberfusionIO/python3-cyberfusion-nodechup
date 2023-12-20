@@ -28,7 +28,7 @@ setup(
     },
     install_requires=[
         "starlette==0.34.0",
-        "uvicorn==0.24.0.post1",
+        "uvicorn==0.25.0",
         "validators==0.22.0",
     ],
     classifiers=[
