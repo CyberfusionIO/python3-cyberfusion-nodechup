@@ -7,7 +7,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="nodechup",
-    version="1.2.1.1",
+    version="1.2.1.2",
     description="Use NodeCHUP to install multiple Node.js versions.",
     long_description=long_description,
     long_description_content_type="text/markdown",
