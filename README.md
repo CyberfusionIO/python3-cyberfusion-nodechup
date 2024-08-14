@@ -54,11 +54,3 @@ Find the systemd configuration in `fast-redirect.service`.
 Use a proxy that terminates SSL. E.g. [HAProxy](http://www.haproxy.org/).
 
 The domain or IP address that the proxy uses for health checks should not be configured as a redirect.
-
-# Tests
-
-Run tests with pytest:
-
-    DATABASE_PATH=fast-redirect.json pytest tests/
-
-The tests must be run from the project root.
