@@ -13,7 +13,7 @@ from nodechup.utilities import get_architecture, get_os_name
 
 
 def test_installation_download_without_update_default_version(
-    base_directory: BaseDirectory,
+    base_directory: Generator[BaseDirectory, None, None],
 ) -> None:
     # Get installation
 
@@ -54,7 +54,7 @@ def test_installation_download_without_update_default_version(
 
 
 def test_installation_download_with_update_default_version(
-    base_directory: BaseDirectory,
+    base_directory: Generator[BaseDirectory, None, None],
 ) -> None:
     # Get installation
 
