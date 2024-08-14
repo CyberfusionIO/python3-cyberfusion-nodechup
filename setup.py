@@ -8,13 +8,13 @@ with open("README.md", "r", encoding="utf-8") as fh:
 setup(
     name="fast_redirect",
     version="1.0.5",
-    description="Fast Redirect redirects domains.",
+    description="fast-redirect redirects domains.",
     long_description=long_description,
     long_description_content_type="text/markdown",
     python_requires=">=3.6",
     author="William Edwards",
     author_email="support@cyberfusion.nl",
-    url="https://github.com/CyberfusionIO/Fast-Redirect",
+    url="https://github.com/CyberfusionIO/fast-redirect",
     platforms=["linux"],
     packages=find_packages(
         include=[
