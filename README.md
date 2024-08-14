@@ -1,6 +1,6 @@
-# Fast Redirect
+# fast-redirect
 
-Fast Redirect redirects domains.
+fast-redirect redirects domains.
 
 # Install
 
@@ -43,7 +43,7 @@ Properties:
 
 ## Start
 
-Start Fast Redirect manually with:
+Start fast-redirect manually with:
 
     bin/fast-redirect
 
