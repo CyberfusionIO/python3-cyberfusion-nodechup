@@ -9,7 +9,7 @@ repos:
       - id: black
         language_version: python3
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.5.0
+    rev: v4.6.0
     hooks:
       - id: check-merge-conflict
       - id: trailing-whitespace
@@ -21,7 +21,7 @@ repos:
       - id: requirements-txt-fixer
       - id: detect-private-key
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.8.0
+    rev: v1.11.1
     hooks:
       - id: mypy
         language_version: python3
@@ -29,7 +29,7 @@ repos:
         # inherit 'exclude' config option from mypy.ini
         exclude: '^migrations/'
   - repo: https://github.com/PyCQA/flake8
-    rev: 7.0.0
+    rev: 7.1.1
     hooks:
       - id: flake8
         # Keep in sync with .flake8. pre-commit does not
