@@ -65,9 +65,3 @@ Installation(base_directory=BaseDirectory(path="/usr/local/lib/nodejs/"), versio
 ## CLI
 
 Run the `nodechup` command without any arguments for help.
-
-# Tests
-
-Run tests with pytest:
-
-    pytest tests/
