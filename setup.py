@@ -8,13 +8,13 @@ with open("README.md", "r", encoding="utf-8") as fh:
 setup(
     name="nodechup",
     version="1.2.1.2",
-    description="Use NodeCHUP to install multiple Node.js versions.",
+    description="Use nodechup to install multiple Node.js versions.",
     long_description=long_description,
     long_description_content_type="text/markdown",
     python_requires=">=3.6",
     author="William Edwards",
     author_email="support@cyberfusion.nl",
-    url="https://github.com/CyberfusionIO/NodeCHUP",
+    url="https://github.com/CyberfusionIO/nodechup",
     platforms=["linux"],
     packages=find_packages(
         include=[

@@ -1,4 +1,4 @@
-"""NodeCHUP.
+"""nodechup.
 
 Usage:
    nodechup install --base-directory-path=<base-directory-path> --version=<version> [--update-default-version]

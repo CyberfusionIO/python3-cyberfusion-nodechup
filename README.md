@@ -1,8 +1,8 @@
-# NodeCHUP
+# nodechup
 
-Use NodeCHUP to install multiple Node.js versions.
+Use nodechup to install multiple Node.js versions.
 
-Need multiple Node.js versions on your system? Installing multiple Node.js Debian packages is not supported. NodeCHUP allows you to install multiple Node.js versions with a Python API and a CLI.
+Need multiple Node.js versions on your system? Installing multiple Node.js Debian packages is not supported. nodechup allows you to install multiple Node.js versions with a Python API and a CLI.
 
 # Install
 
@@ -39,7 +39,7 @@ If the point release is omitted, the most recent point release for the specified
 
 #### Release symlink
 
-If 'update default version' is true, NodeCHUP creates a symlink in the base directory path from the major/minor release to the installed point release.
+If 'update default version' is true, nodechup creates a symlink in the base directory path from the major/minor release to the installed point release.
 
 For example:
 
