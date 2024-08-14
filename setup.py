@@ -11,9 +11,8 @@ setup(
     description="fast-redirect redirects domains.",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    python_requires=">=3.6",
-    author="William Edwards",
-    author_email="support@cyberfusion.nl",
+    author="Cyberfusion",
+    author_email="support@cyberfusion.io",
     url="https://github.com/CyberfusionIO/fast-redirect",
     platforms=["linux"],
     packages=find_packages(
@@ -31,11 +30,4 @@ setup(
         "uvicorn==0.26.0",
         "validators==0.22.0",
     ],
-    classifiers=[
-        "Programming Language :: Python :: 3",
-        "License :: OSI Approved :: MIT License",
-        "Operating System :: OS Independent",
-    ],
-    keywords=["cyberfusion", "starlette"],
-    license="MIT",
 )
