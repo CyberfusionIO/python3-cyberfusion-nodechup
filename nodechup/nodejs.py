@@ -16,7 +16,7 @@ from nodechup.utilities import (
 
 
 class NodeJSAlreadyInstalled(Exception):
-    """Exception to raise if Node.js already installed at path."""
+    """Node.js is already installed in path."""
 
     pass
 
