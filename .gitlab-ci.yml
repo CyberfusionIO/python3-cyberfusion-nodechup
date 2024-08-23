@@ -16,6 +16,7 @@ unit test and feature test:
   image: python:3.11
   script:
     - pip install --no-cache-dir -r requirements/test.txt
+    - pip install .
     - pytest -n 10 -vvv --cov-branch --cov=nodechup --cov-config=.coveragerc --cov-fail-under=50 --junitxml=report-pytest.xml
   artifacts:
     reports:
