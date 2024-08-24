@@ -81,9 +81,7 @@ class BaseDirectory:
         If a symlink already exists to another (usually older) point release, it is replaced
         atomically.
         """
-        major_minor_path = os.path.join(
-            self.path, f"{version.major}.{version.minor}"
-        )
+        major_minor_path = os.path.join(self.path, f"{version.major}.{version.minor}")
         major_minor_path_tmp = major_minor_path + "-tmp"
 
         os.symlink(point_version_path, major_minor_path_tmp)
@@ -109,9 +107,7 @@ class Installation:
         This is the name of the archive as well as the name of the directory
         inside the archive.
         """
-        return (
-            f"node-v{str(self.version)}-{get_os_name()}-{get_architecture()}"
-        )
+        return f"node-v{str(self.version)}-{get_os_name()}-{get_architecture()}"
 
     @property
     def _download_url(self) -> str:
@@ -156,6 +152,4 @@ class Installation:
         # Update default version
 
         if update_default_version:
-            self.base_directory.set_default_version(
-                self._version_path, self.version
-            )
+            self.base_directory.set_default_version(self._version_path, self.version)
