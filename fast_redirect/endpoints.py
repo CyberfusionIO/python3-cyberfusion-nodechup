@@ -13,9 +13,7 @@ from fast_redirect.utilities import build_url
 class Redirect(HTTPEndpoint):
     """Redirect endpoint."""
 
-    async def get(
-        self, request: Request
-    ) -> Union[RedirectResponse, JSONResponse]:
+    async def get(self, request: Request) -> Union[RedirectResponse, JSONResponse]:
         """Implement GET method."""
 
         # Handle errors

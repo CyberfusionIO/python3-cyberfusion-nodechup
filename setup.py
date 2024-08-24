@@ -22,9 +22,7 @@ setup(
         ]
     ),
     data_files=[],
-    entry_points={
-        "console_scripts": ["fast-redirect=fast_redirect.server:main"]
-    },
+    entry_points={"console_scripts": ["fast-redirect=fast_redirect.server:main"]},
     install_requires=[
         "starlette==0.38.2",
         "uvicorn==0.30.6",

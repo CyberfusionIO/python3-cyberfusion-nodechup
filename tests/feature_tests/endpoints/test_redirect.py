@@ -44,9 +44,7 @@ def test_redirect_domain_invalid_destination_url(
     test_client: TestClient,
 ) -> None:
     """Test response when the destination URL is invalid."""
-    response = test_client.get(
-        "/", headers={"Host": "301-invalid-destination-url.com"}
-    )
+    response = test_client.get("/", headers={"Host": "301-invalid-destination-url.com"})
     assert response.status_code == 500
     assert response.json() == {
         "detail": "The destination URL for this redirect is invalid."
@@ -57,9 +55,7 @@ def test_redirect_domain_invalid_status_code(
     test_client: TestClient,
 ) -> None:
     """Test response when the status code is invalid."""
-    response = test_client.get(
-        "/", headers={"Host": "200-invalid-status-code.com"}
-    )
+    response = test_client.get("/", headers={"Host": "200-invalid-status-code.com"})
     assert response.status_code == 500
     assert response.json() == {
         "detail": "The status code for this redirect is invalid."
@@ -119,9 +115,7 @@ def test_redirect_domain_keep_path(path: str, test_client: TestClient) -> None:
 
 
 @pytest.mark.parametrize("path", DEFAULT_PATH_PARAMS)
-def test_redirect_domain_discard_path(
-    path: str, test_client: TestClient
-) -> None:
+def test_redirect_domain_discard_path(path: str, test_client: TestClient) -> None:
     """Test that path is discarded."""
     response = test_client.get(
         path, headers=HEADERS_302_KEEP_NONE, **REDIRECT_REQUEST_OPTS
