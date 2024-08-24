@@ -19,7 +19,8 @@ def _get_versions() -> List[Tuple[int, int, int]]:
 
     _csv = csv.DictReader(
         codecs.iterdecode(
-            urllib.request.urlopen(URL_VERSIONS_TAB), "utf-8"  # noqa: S310
+            urllib.request.urlopen(URL_VERSIONS_TAB),
+            "utf-8",  # noqa: S310
         ),
         delimiter="\t",
     )

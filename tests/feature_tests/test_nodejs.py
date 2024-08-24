@@ -17,9 +17,7 @@ def test_installation_download_without_update_default_version(
 ) -> None:
     # Get installation
 
-    installation = Installation(
-        base_directory=base_directory, version="14.19.1"
-    )
+    installation = Installation(base_directory=base_directory, version="14.19.1")
 
     # Test attributes
 
@@ -58,9 +56,7 @@ def test_installation_download_with_update_default_version(
 ) -> None:
     # Get installation
 
-    installation = Installation(
-        base_directory=base_directory, version="17.7.2"
-    )
+    installation = Installation(base_directory=base_directory, version="17.7.2")
 
     # Test attributes
 

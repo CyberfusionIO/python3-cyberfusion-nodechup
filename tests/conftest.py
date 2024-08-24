@@ -1,4 +1,3 @@
-import os
 import shutil
 import uuid
 from typing import Generator
