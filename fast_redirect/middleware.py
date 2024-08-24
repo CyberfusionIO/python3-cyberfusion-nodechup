@@ -36,9 +36,7 @@ class InjectRedirectInformationMiddleware(BaseHTTPMiddleware):
         if parsed_domain:
             try:
                 request.state.redirect_information = (
-                    request.app.state.database.get_redirect_information(
-                        parsed_domain
-                    )
+                    request.app.state.database.get_redirect_information(parsed_domain)
                 )
 
                 request.state.redirect_error = None

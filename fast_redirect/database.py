@@ -105,9 +105,7 @@ class Database:
 
             self.redirects[domain] = Redirect(domain=domain, **obj)
 
-    def _get_redirect_by_literal_domain(
-        self, domain: str
-    ) -> Optional[Redirect]:
+    def _get_redirect_by_literal_domain(self, domain: str) -> Optional[Redirect]:
         """Get redirect from database by literal domain."""
         try:
             return self.redirects[domain]
@@ -116,9 +114,7 @@ class Database:
 
             return None
 
-    def _get_redirect_by_wildcard_domain(
-        self, domain: str
-    ) -> Optional[Redirect]:
+    def _get_redirect_by_wildcard_domain(self, domain: str) -> Optional[Redirect]:
         """Get redirect from database by wildcard domain."""
         for _domain, redirect in self.redirects.items():
             # This can't match if the _domain is not a wildcard
@@ -148,18 +144,14 @@ class Database:
 
         # Get redirect by literal domain (prefer over wildcard)
 
-        _redirect_by_literal_domain = self._get_redirect_by_literal_domain(
-            domain
-        )
+        _redirect_by_literal_domain = self._get_redirect_by_literal_domain(domain)
 
         if _redirect_by_literal_domain:
             return RedirectInformation(_redirect_by_literal_domain)
 
         # Get redirect by wildcard domain
 
-        _redirect_by_wildcard_domain = self._get_redirect_by_wildcard_domain(
-            domain
-        )
+        _redirect_by_wildcard_domain = self._get_redirect_by_wildcard_domain(domain)
 
         if _redirect_by_wildcard_domain:
             return RedirectInformation(_redirect_by_wildcard_domain)
