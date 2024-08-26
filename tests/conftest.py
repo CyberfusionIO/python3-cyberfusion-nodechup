@@ -4,7 +4,7 @@ from typing import Generator
 
 import pytest
 
-from nodechup.nodejs import BaseDirectory, NodeJSVersion
+from cyberfusion.Nodechup.nodejs import BaseDirectory, NodeJSVersion
 
 
 @pytest.fixture(scope="session")

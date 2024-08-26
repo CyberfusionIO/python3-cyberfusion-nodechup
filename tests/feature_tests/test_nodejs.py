@@ -3,13 +3,13 @@ from typing import Generator
 
 import pytest
 
-from nodechup.nodejs import (
+from cyberfusion.Nodechup.nodejs import (
     BaseDirectory,
     Installation,
     NodeJSAlreadyInstalled,
     NodeJSVersion,
 )
-from nodechup.utilities import get_architecture, get_os_name
+from cyberfusion.Nodechup.utilities import get_architecture, get_os_name
 
 
 def test_installation_download_without_update_default_version(
