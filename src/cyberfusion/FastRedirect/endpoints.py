@@ -6,8 +6,8 @@ from starlette.endpoints import HTTPEndpoint
 from starlette.requests import Request
 from starlette.responses import JSONResponse, RedirectResponse
 
-from fast_redirect import settings
-from fast_redirect.utilities import build_url
+from cyberfusion.FastRedirect import settings
+from cyberfusion.FastRedirect.utilities import build_url
 
 
 class Redirect(HTTPEndpoint):

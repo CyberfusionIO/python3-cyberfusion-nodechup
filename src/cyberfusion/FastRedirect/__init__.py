@@ -5,9 +5,9 @@ from starlette.middleware import Middleware
 from starlette.middleware.trustedhost import TrustedHostMiddleware
 from starlette.routing import Route
 
-from fast_redirect.database import Database
-from fast_redirect.endpoints import Redirect
-from fast_redirect.middleware import InjectRedirectInformationMiddleware
+from cyberfusion.FastRedirect.database import Database
+from cyberfusion.FastRedirect.endpoints import Redirect
+from cyberfusion.FastRedirect.middleware import InjectRedirectInformationMiddleware
 
 # Initialise app
 #

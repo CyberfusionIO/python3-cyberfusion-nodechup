@@ -6,7 +6,7 @@ from urllib.parse import parse_qsl, urlencode, urljoin, urlparse, urlunparse
 import validators
 from starlette.datastructures import QueryParams
 
-from fast_redirect.exceptions.http_host_header import (
+from cyberfusion.FastRedirect.exceptions.http_host_header import (
     HTTPHostHeaderDomainEmptyError,
     HTTPHostHeaderDomainInvalidError,
 )

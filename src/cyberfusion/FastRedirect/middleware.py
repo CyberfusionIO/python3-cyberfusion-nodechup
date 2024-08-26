@@ -6,9 +6,9 @@ from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.requests import Request
 from starlette.responses import Response
 
-from fast_redirect.exceptions.database import DatabaseError
-from fast_redirect.exceptions.http_host_header import HTTPHostHeaderError
-from fast_redirect.utilities import parse_host_header
+from cyberfusion.FastRedirect.exceptions.database import DatabaseError
+from cyberfusion.FastRedirect.exceptions.http_host_header import HTTPHostHeaderError
+from cyberfusion.FastRedirect.utilities import parse_host_header
 
 
 class InjectRedirectInformationMiddleware(BaseHTTPMiddleware):
