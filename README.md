@@ -51,9 +51,10 @@ Use the Python API as follows:
 ```python
 import os
 
-from nodechup.nodejs import BaseDirectory, Installation
+from cyberfusion.Nodechup import BaseDirectory, Installation
 
-Installation(base_directory=BaseDirectory(path="/usr/local/lib/nodejs/"), version="14.19.1").download(update_default_version=True)
+Installation(base_directory=BaseDirectory(path="/usr/local/lib/nodejs/"), version="14.19.1").download(
+    update_default_version=True)
 ```
 
 ## CLI

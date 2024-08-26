@@ -7,7 +7,7 @@ from contextlib import closing
 
 import requests
 
-from nodechup.utilities import (
+from cyberfusion.Nodechup.utilities import (
     URL_MIRROR,
     get_architecture,
     get_latest_point_release,

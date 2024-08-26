@@ -15,7 +15,11 @@ import sys
 from docopt import docopt
 from schema import Schema
 
-from nodechup.nodejs import BaseDirectory, Installation, NodeJSAlreadyInstalled
+from cyberfusion.Nodechup.nodejs import (
+    BaseDirectory,
+    Installation,
+    NodeJSAlreadyInstalled,
+)
 
 """Program to manage Node.js installations."""
 

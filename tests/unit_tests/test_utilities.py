@@ -1,4 +1,4 @@
-from nodechup.utilities import (
+from cyberfusion.Nodechup.utilities import (
     _get_versions,
     get_architecture,
     get_latest_point_release,

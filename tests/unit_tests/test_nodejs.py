@@ -1,6 +1,6 @@
 import os
 
-from nodechup.nodejs import BaseDirectory, NodeJSVersion
+from cyberfusion.Nodechup.nodejs import BaseDirectory, NodeJSVersion
 
 
 def test_base_directory_created(base_directory: BaseDirectory) -> None:
