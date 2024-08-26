@@ -2,7 +2,8 @@
 
 import uvicorn
 
-from fast_redirect import app, settings
+from cyberfusion.FastRedirect import app
+from cyberfusion.FastRedirect import settings
 
 
 def main() -> None:

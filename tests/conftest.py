@@ -1,7 +1,7 @@
 import pytest
 from starlette.testclient import TestClient
 
-from fast_redirect import app
+from cyberfusion.FastRedirect import app
 
 
 @pytest.fixture

@@ -6,13 +6,13 @@ from typing import Dict, Optional
 import validators
 from starlette import status
 
-from fast_redirect import settings
-from fast_redirect.exceptions.database import (
+from cyberfusion.FastRedirect import settings
+from cyberfusion.FastRedirect.exceptions.database import (
     DestinationURLInvalidError,
     DomainNotExistsError,
     StatusCodeInvalidError,
 )
-from fast_redirect.utilities import CHAR_LABEL, get_domain_is_wildcard
+from cyberfusion.FastRedirect.utilities import CHAR_LABEL, get_domain_is_wildcard
 
 
 class Redirect:
