@@ -6,12 +6,6 @@ Need multiple Node.js versions on your system? Installing multiple Node.js Debia
 
 # Install
 
-## Generic
-
-Run the following command to create a source distribution:
-
-    python3 setup.py sdist
-
 ## PyPI
 
 Run the following command to install the package from PyPI:

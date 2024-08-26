@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nodechup"
+version = "1.2.1.3"
+description = "Use nodechup to install multiple Node.js versions."
+readme = "README.md"
+authors = [
+    { name = "Cyberfusion", email = "support@cyberfusion.io" },
+]
+dependencies = [
+    "docopt==0.6.2",
+    "schema==0.7.7",
+    "requests==2.32.3",
+]
+
+[project.urls]
+"Source" = "https://github.com/CyberfusionIO/nodechup"
+
+[project.scripts]
+nodechup = "nodechup.CLI:main"
