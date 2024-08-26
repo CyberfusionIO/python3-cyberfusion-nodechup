@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "nodechup"
-version = "1.2.2"
+version = "1.2.2.1"
 description = "Use nodechup to install multiple Node.js versions."
 readme = "README.md"
 authors = [
@@ -20,4 +20,4 @@ dependencies = [
 "Source" = "https://github.com/CyberfusionIO/nodechup"
 
 [project.scripts]
-nodechup = "nodechup.CLI:main"
+nodechup = "cyberfusion.Nodechup.CLI:main"
