@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "fast-redirect"
-version = "1.0.6"
+version = "1.0.6.1"
 description = "fast-redirect redirects domains."
 readme = "README.md"
 authors = [
@@ -20,4 +20,4 @@ dependencies = [
 "Source" = "https://github.com/CyberfusionIO/fast-redirect"
 
 [project.scripts]
-fast-redirect = "fast_redirect.server:main"
+fast-redirect = "cyberfusion.FastRedirect.server:main"
