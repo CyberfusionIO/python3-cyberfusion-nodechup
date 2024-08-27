@@ -12,6 +12,9 @@ stages:
   - build
   - publish
 
+variables:
+  APTLY_BASE_REPOSITORY: common
+
 unit test and feature test:
   stage: test
   image: python:3.11
