@@ -1,0 +1,15 @@
+[Unit]
+Description=fast-redirect
+After=network.target
+
+[Service]
+User=fast-redirect
+Group=fast-redirect
+ExecStart=/usr/bin/fast-redirect
+PrivateTmp=true
+KillMode=mixed
+
+Environment=DATABASE_PATH=/var/lib/fast-redirect.json
+
+[Install]
+WantedBy=multi-user.target

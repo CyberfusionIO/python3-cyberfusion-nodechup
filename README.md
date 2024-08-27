@@ -1,4 +1,4 @@
-# fast-redirect
+# python3-cyberfusion-fast-redirect
 
 fast-redirect redirects domains.
 
@@ -8,7 +8,14 @@ fast-redirect redirects domains.
 
 Run the following command to install the package from PyPI:
 
-    pip3 install fast-redirect
+    pip3 install python3-cyberfusion-fast-redirect
+
+## Debian
+
+Run the following commands to build a Debian package:
+
+    mk-build-deps -i -t 'apt -o Debug::pkgProblemResolver=yes --no-install-recommends -y'
+    dpkg-buildpackage -us -uc
 
 # Configure
 
@@ -35,13 +42,13 @@ Properties:
 
 # Usage
 
-## Start
-
-Start fast-redirect manually with:
+## Manually
 
     bin/fast-redirect
 
-Find the systemd configuration in `fast-redirect.service`.
+### systemd
+
+    systemctl start fast-redirect.service
 
 ## SSL
 
