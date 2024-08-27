@@ -4,6 +4,7 @@ include:
     file:
       - '/base.yml'
       - '/pypi-packages.yml'
+      - '/debian-packages.yml'
       - '/python.yml'
 
 stages:
@@ -17,7 +18,7 @@ unit test and feature test:
   script:
     - pip install --no-cache-dir -r requirements/test.txt
     - pip install .
-    - DATABASE_PATH=fast-redirect.json pytest -n 10 -vvv --cov-branch --cov=cyberfusion.FastRedirect --cov-config=.coveragerc --cov-fail-under=95 --junitxml=report-pytest.xml
+    - DATABASE_PATH=tests/fast-redirect.json pytest -n 10 -vvv --cov-branch --cov=cyberfusion.FastRedirect --cov-config=.coveragerc --cov-fail-under=95 --junitxml=report-pytest.xml
   artifacts:
     reports:
       junit: report-*.xml
