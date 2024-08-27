@@ -1,0 +1,5 @@
+python3-cyberfusion-nodechup (1.2.2.2) unstable; urgency=low
+
+  - Build Debian package
+
+ -- William Edwards <wedwards@cyberfusion.nl>  Tue, 27 Aug 2024 17:55:00 +0200

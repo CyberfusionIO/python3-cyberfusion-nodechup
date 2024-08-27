@@ -4,6 +4,7 @@ include:
     file:
       - '/base.yml'
       - '/pypi-packages.yml'
+      - '/debian-packages.yml'
       - '/python.yml'
 
 stages:

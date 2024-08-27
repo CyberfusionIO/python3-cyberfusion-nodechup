@@ -1,4 +1,4 @@
-# nodechup
+# python3-cyberfusion-nodechup
 
 Use nodechup to install multiple Node.js versions.
 
@@ -10,7 +10,14 @@ Need multiple Node.js versions on your system? Installing multiple Node.js Debia
 
 Run the following command to install the package from PyPI:
 
-    pip3 install nodechup
+    pip3 install python3-cyberfusion-nodechup
+
+## Debian
+
+Run the following commands to build a Debian package:
+
+    mk-build-deps -i -t 'apt -o Debug::pkgProblemResolver=yes --no-install-recommends -y'
+    dpkg-buildpackage -us -uc
 
 # Configure
 
