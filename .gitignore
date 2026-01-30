@@ -134,3 +134,6 @@ report-mypy.xml
 
 # macOS
 .DS_Store
+
+# Project
+base_directory/

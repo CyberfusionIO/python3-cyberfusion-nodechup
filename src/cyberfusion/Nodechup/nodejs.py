@@ -149,7 +149,14 @@ class Installation:
 
         os.unlink(self.PATH_ARCHIVE)
 
-        # Update default version
+        # Symlink major/minor/point (e.g. 22.16.0 -> node-v22.16.0-linux-x64)
+
+        os.symlink(
+            self._version_path,
+            os.path.join(self.base_directory.path, str(self.version)),
+        )
+
+        # Update default version (e.g. 22.16 (no point) -> node-v22.16.0-linux-x64)
 
         if update_default_version:
             self.base_directory.set_default_version(self._version_path, self.version)
