@@ -1,6 +1,9 @@
 import os
+from typing import Generator
 
 from cyberfusion.Nodechup.nodejs import BaseDirectory, NodeJSVersion
+
+from cyberfusion.Nodechup.nodejs import Installation
 
 
 def test_base_directory_created(base_directory: BaseDirectory) -> None:
@@ -28,3 +31,18 @@ def test_nodejs_version_without_point_release(
     assert nodejs_version_without_point_release.major == 17
     assert nodejs_version_without_point_release.minor == 7
     assert nodejs_version_without_point_release.point == 2  # Automatic
+
+
+def test_installation_download_symlink(
+    base_directory: Generator[BaseDirectory, None, None],
+) -> None:
+    version = "17.7.2"
+
+    installation = Installation(base_directory=base_directory, version=version)
+
+    installation.download()
+
+    assert (
+        os.readlink(os.path.join(base_directory.path, version))
+        == installation._version_path
+    )

@@ -1,3 +1,9 @@
+python3-cyberfusion-nodechup (1.4) unstable; urgency=low
+
+  - Base directory: symlink human-readable version to archive name
+
+ -- William Edwards <wedwards@cyberfusion.nl>  Fri, 30 Jan 2026 17:00:00 +0200
+
 python3-cyberfusion-nodechup (1.3) unstable; urgency=low
 
   - Update to Trixie
