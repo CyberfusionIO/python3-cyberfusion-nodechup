@@ -1,3 +1,9 @@
+python3-cyberfusion-nodechup (1.4.1) unstable; urgency=low
+
+  - Replace symlink parsing with 'python3-semantic-version' library
+
+ -- Bence Racsko <bracsko@cyberfusion.nl>   Wed, 4 Nov 16:30:00 +0200
+
 python3-cyberfusion-nodechup (1.4) unstable; urgency=low
 
   - Base directory: symlink human-readable version to archive name
