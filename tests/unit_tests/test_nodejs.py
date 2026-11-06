@@ -1,9 +1,7 @@
 import os
 from typing import Generator
 
-from cyberfusion.Nodechup.nodejs import BaseDirectory, NodeJSVersion
-
-from cyberfusion.Nodechup.nodejs import Installation
+from cyberfusion.Nodechup.nodejs import BaseDirectory, Installation, NodeJSVersion
 
 
 def test_base_directory_created(base_directory: BaseDirectory) -> None:
