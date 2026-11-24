@@ -1,19 +1,8 @@
-"""nodechup.
-
-Usage:
-   nodechup install --base-directory-path=<base-directory-path> --version=<version> [--update-default-version]
-
-Options:
-  -h --help                                      Show this screen.
-  --base-directory-path=<base-directory-path>    Path to base directory
-  --version=<version>                            Version of Node.js installation. Exits with RC 78 if Node.js version is already installed.
-  --update-default-version                       Update default point release for major/minor version.
-"""
+"""Program to manage Node.js installations."""
 
 import sys
 
-from docopt import docopt
-from schema import Schema
+import typer
 
 from cyberfusion.Nodechup.nodejs import (
     BaseDirectory,
@@ -21,40 +10,47 @@ from cyberfusion.Nodechup.nodejs import (
     NodeJSAlreadyInstalled,
 )
 
-"""Program to manage Node.js installations."""
+app = typer.Typer(no_args_is_help=True)
+
+
+@app.callback()
+def callback() -> None:
+    """Manage Node.js installations."""
+
+    # Keeps 'install' a subcommand: with a single command, typer would run it as the
+    # top-level command
+
+
+@app.command()
+def install(
+    base_directory_path: str = typer.Option(
+        ..., "--base-directory-path", help="Path to base directory."
+    ),
+    version: str = typer.Option(
+        ...,
+        "--version",
+        help="Version of Node.js installation. Exits with RC 78 if Node.js version is already installed.",
+    ),
+    update_default_version: bool = typer.Option(
+        False,
+        "--update-default-version",
+        help="Update default point release for major/minor version.",
+    ),
+) -> None:
+    """Install Node.js version."""
+    base_directory = BaseDirectory(path=base_directory_path)
+    installation = Installation(base_directory=base_directory, version=version)
+
+    try:
+        installation.download(update_default_version=update_default_version)
+    except NodeJSAlreadyInstalled:
+        print(
+            "Node.js installation with the specified version already exists in the base directory"
+        )
+
+        sys.exit(78)
 
 
 def main() -> None:
     """Spawn relevant class for CLI function."""
-
-    # Validate input
-
-    args = docopt(__doc__)
-    schema = Schema(
-        {
-            "install": bool,
-            "--base-directory-path": str,
-            "--version": str,
-            "--update-default-version": bool,
-        }
-    )
-    args = schema.validate(args)
-
-    # Run classes
-
-    if args["install"]:
-        base_directory = BaseDirectory(path=args["--base-directory-path"])
-        installation = Installation(
-            base_directory=base_directory, version=args["--version"]
-        )
-
-        try:
-            installation.download(
-                update_default_version=args["--update-default-version"]
-            )
-        except NodeJSAlreadyInstalled:
-            print(
-                "Node.js installation with the specified version already exists in the base directory"
-            )
-
-            sys.exit(78)
+    app()
