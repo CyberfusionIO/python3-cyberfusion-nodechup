@@ -1,10 +1,9 @@
 """Generic utilities."""
 
-import codecs
 import csv
 import platform
-import urllib.request
 
+import requests
 import semantic_version
 
 URL_MIRROR = "https://nodejs.org/dist"
@@ -26,13 +25,10 @@ def _get_versions() -> list[tuple[int, int, int]]:
     """Get available Node.js versions."""
     versions = []
 
-    _csv = csv.DictReader(
-        codecs.iterdecode(
-            urllib.request.urlopen(URL_VERSIONS_TAB),
-            "utf-8",
-        ),
-        delimiter="\t",
-    )
+    response = requests.get(URL_VERSIONS_TAB)
+    response.raise_for_status()
+
+    _csv = csv.DictReader(response.text.splitlines(), delimiter="\t")
 
     for row in _csv:
         major, minor, point, release = _parse_semver(row["version"])

@@ -19,6 +19,10 @@ repos:
         additional_dependencies:
           # Keep versions in sync with requirements/dev.txt
           - types-requests==2.27.16
+          # Debian 13 (trixie) versions, so typer's decorators are typed. python3-click
+          # is 8.2.0+0.really.8.1.8, so actually 8.1.8
+          - click==8.1.8
+          - typer==0.15.2
   - repo: https://github.com/pre-commit/pygrep-hooks
     rev: v1.10.0
     hooks:
